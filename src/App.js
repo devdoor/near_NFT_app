@@ -3,6 +3,7 @@ import React from 'react'
 import { login, logout } from './utils'
 import './global.css'
 import './scss/AppStyles.scss';
+import Options from './Container/Options.js'
 
 // Bootstrap Components
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -37,6 +38,7 @@ export default function App() {
           <Container>
             <div class="col d-flex justify-content-center">
               <Row>
+                  <Options/>
               </Row>
                 </div>
           </Container>
