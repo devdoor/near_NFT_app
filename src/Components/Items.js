@@ -1,19 +1,10 @@
 import React from 'react';
 import {Card, Button, Row, Col, Container} from 'react-bootstrap'
 import * as nearAPI from 'near-api-js';
-export const {
-	utils: {
-		format: {
-			formatNearAmount, parseNearAmount
-		}
-	}
-} = nearAPI;
 
-
-const DEPOSIT = parseNearAmount('0.1');
 const TOKEN_ID = "099";
-const GAS = "200000000000000";
-let price
+
+let price, mint_deposit, gas_price
 
   const Items =(props)=> {
 		fetchPrice();
@@ -23,14 +14,14 @@ let price
 			token_id: TOKEN_ID,
 			receiver_id: window.accountId,
 			token_metadata: props.metadata
-			}, GAS, DEPOSIT);
+			}, gas_price, mint_deposit);
 		}
 		// buy button behavoiur
 		const buyNowButton = async () => {
 			await window.contract.near_transfer({
 			to: "devdoor5.testnet",
 			amount: price
-		}, GAS, price);
+		}, gas_price, price);
 		}
 
       return (
@@ -59,7 +50,10 @@ let price
   }
 
 	async function fetchPrice() {
-		price = await contract.get_price()
+		price = await contract.get_price();
+		mint_deposit = await contract.get_mint_deposit();
+		gas_price = await contract.get_gas_price();
+		return {price, mint_deposit, gas_price}
 	}
 
   export default Items;

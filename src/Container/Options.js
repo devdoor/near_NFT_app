@@ -11,7 +11,7 @@ import './../css/reactAppUtils.css'
     listItems = [
       {metadata: { 'title': 'Near', 'description': "Near (ニア, Nia) is the younger of L's two successors, raised in Wammy's House—Watari's orphanage for gifted children in Winchester, England",
     'media': 'https://bafybeia5tdrinbi7m2dhnpsahizkagn5cshrmqyhjnwig4vtfgdsnhcdkm.ipfs.dweb.link',
-    'copies': 1}}
+    'copies': 1, 'token_id': '1200'}}
     ]
 
 
