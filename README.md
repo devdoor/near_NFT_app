@@ -10,6 +10,7 @@ Many code snippets and components were borrowed from the following repositories 
   - near-examples/DeCash-Rust
   - near-apps/payments-api
   - near/create-near-app
+
 The app consists of a simple interface displaying one image and three buttons interacting with the NEAR testnet:
 
 Login / Logout
@@ -19,6 +20,7 @@ Allows the user to log in and out of their wallet. Automatically toggled based o
 Mint
 -------------------------------------
 Allows a logged in user to mint the displayed image as an NFT into their testnet wallet.
+
 Buy Now
 -------------------------------------
 Ideally should allow the user to pay a fixed amount to the previous owner of the NFT and transfer it to their wallet. Currently only the payment part was implemented, with a fixed amount (2.9N) being transferred to the same wallet calling the method.
