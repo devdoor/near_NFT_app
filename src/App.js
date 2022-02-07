@@ -2,6 +2,7 @@ import 'regenerator-runtime/runtime'
 import React from 'react'
 import { login, logout } from './utils'
 import './global.css'
+import './scss/AppStyles.scss';
 
 // Bootstrap Components
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,26 +14,35 @@ const { networkId } = getConfig(process.env.NODE_ENV || 'development')
 export default function App() {
 
     return (
-      <main>
-        <h1>Welcome to NEAR!</h1>
-        <p>
-          To make use of the NEAR blockchain, you need to sign in. The button
-          below will sign you in using NEAR Wallet.
-        </p>
-        <p>
-          By default, when your app runs in "development" mode, it connects
-          to a test network ("testnet") wallet. This works just like the main
-          network ("mainnet") wallet, but the NEAR Tokens on testnet aren't
-          convertible to other currencies – they're just for testing!
-        </p>
-        <p>
-          Go ahead and click the button below to try it out:
-        </p>
-        <p style={{ textAlign: 'center', marginTop: '2.5em' }}>
-          <button onClick={login}>Sign in</button>
-        </p>
-      </main>
+      <div className="App">
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Container>
+          <Navbar.Brand>Mint NFT</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              </Nav>
+              <Nav>
+                {!window.walletConnection.isSignedIn() ? (
+              <Nav.Link  onClick={login}>Login</Nav.Link>
+            ):(
+              <Nav.Link  onClick={logout}>Logout</Nav.Link>
+            )}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+        </Navbar>
+        <main>
+
+          <Container>
+            <div class="col d-flex justify-content-center">
+              <Row>
+              </Row>
+                </div>
+          </Container>
+
+        </main>
+
+      </div>
     )
   }
-
-  

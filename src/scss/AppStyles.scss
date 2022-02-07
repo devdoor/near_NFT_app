@@ -1,0 +1,8 @@
+// Modify default bootstrap styles
+
+$body-bg: #ffffff;
+
+@import "Options";
+
+// do that before the import
+@import "~bootstrap/scss/bootstrap";
