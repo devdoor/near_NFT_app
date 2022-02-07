@@ -144,6 +144,41 @@ mod tests {
         let _contract = Contract::default();
     }
 
-    
+    fn sample_token_metadata() -> TokenMetadata {
+        TokenMetadata {
+            title: Some("Olympus Mons".into()),
+            description: Some("The tallest mountain in the charted solar system".into()),
+            media: None,
+            media_hash: None,
+            copies: Some(1u64),
+            issued_at: None,
+            expires_at: None,
+            starts_at: None,
+            updated_at: None,
+            extra: None,
+            reference: None,
+            reference_hash: None,
+        }
+    }
+
+    const MINT_DEPOSIT: u128 = 5870000000000000000000;
+    #[test]
+    fn test_mint() {
+        let mut context = get_context(accounts(0));
+        testing_env!(context.build());
+        let mut contract = Contract::default();
+
+        testing_env!(context
+            .storage_usage(env::storage_usage())
+            .attached_deposit(MINT_DEPOSIT)
+            .predecessor_account_id(accounts(0))
+            .build());
+
+        let token_id = "0".to_string();
+        let token = contract.mint_now(token_id.clone(), accounts(0), sample_token_metadata());
+        assert_eq!(token.token_id, token_id);
+        assert_eq!(token.owner_id, accounts(0));
+        assert_eq!(token.metadata.unwrap(), sample_token_metadata());
+    }
 
 }
