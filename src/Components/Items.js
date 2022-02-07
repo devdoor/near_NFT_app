@@ -17,7 +17,7 @@ let price, mint_deposit, gas_price
 		// buy button behavoiur
 		const buyNowButton = async () => {
 			await window.contract.near_transfer({
-			to: "devdoor5.testnet",
+			to: window.accountId,
 			amount: price
 		}, gas_price, price);
 		}
