@@ -1,7 +1,7 @@
 near_NFT_app
 ==================
 
-<!--[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/projects/near_NFT_app>)-->
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/projects/near_NFT_app>)
 
 This work-in-progress application was created on February 2022 as a reply to the 'Chikai coding test' for the position of Smart Contracts engineer.
 Many code snippets and components were borrowed from the following repositories available on GitHub:
