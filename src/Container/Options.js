@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import {Container, Row, Card} from 'react-bootstrap';
-//import sara from './../assets/sara.jpg'
-const sara = 'https://www.publicdomainpictures.net/pictures/200000/velka/lady-on-vintage-postcard-1474314845SA7.jpg'
+
 import Item from './../Components/Items.js'
 import './../css/reactAppUtils.css'
 
 
   class Options extends Component {
 
+
     listItems = [
-      {name:"sara.jpg", price:30, description:"befana", picture:sara}
+      {metadata: { 'title': 'Olympus Mons', 'description': 'Tallest mountain in charted solar system',
+    'media': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Olympus_Mons_alt.jpg/1024px-Olympus_Mons_alt.jpg',
+    'copies': 1}}
     ]
 
 
@@ -20,7 +22,7 @@ import './../css/reactAppUtils.css'
                 {
                   this.listItems.map(x=>{
                     return <Row>
-                      <Item name={x.name} price={x.price} description={x.description} picture={x.picture}/>
+                      <Item metadata={x.metadata} picture={x.metadata.media}/>
 
                     </Row>
                   })
