@@ -11,17 +11,12 @@ use near_contract_standards::non_fungible_token::metadata::{
  };
 use near_contract_standards::non_fungible_token::{Token, TokenId};
 use near_contract_standards::non_fungible_token::NonFungibleToken;
-use near_sdk::json_types::ValidAccountId;
 use near_sdk::{
      env, near_bindgen, AccountId, BorshStorageKey, Promise, PromiseOrValue,
-     PanicOnDefault, setup_alloc
  };
 
-
-setup_alloc!();
-
 #[near_bindgen]
-#[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
+#[derive(BorshDeserialize, BorshSerialize)]
 pub struct Contract {
     tokens: NonFungibleToken,
     metadata: LazyOption<NFTContractMetadata>,
@@ -38,48 +33,40 @@ enum StorageKey {
     Approval,
 }
 
+impl Default for Contract{
+    fn default() -> Self {
+      Self {
+          tokens: NonFungibleToken::new(
+              StorageKey::NonFungibleToken,
+              env::current_account_id(),
+              Some(StorageKey::TokenMetadata),
+              Some(StorageKey::Enumeration),
+              Some(StorageKey::Approval),
+          ),
+          metadata: LazyOption::new(StorageKey::Metadata, Some(&(NFTContractMetadata {
+          spec: NFT_METADATA_SPEC.to_string(),
+          name: "Example NEAR non-fungible token".to_string(),
+          symbol: "EXAMPLE".to_string(),
+          icon: Some(DATA_IMAGE_SVG_NEAR_ICON.to_string()),
+          base_uri: None,
+          reference: None,
+          reference_hash: None,
+      }))),
+      }
+  }
+}
+
 #[near_bindgen]
 impl Contract {
-    #[init]
-    pub fn new_default_meta(owner_id: ValidAccountId) -> Self {
-        Self::new(
-            owner_id,
-            NFTContractMetadata {
-                spec: NFT_METADATA_SPEC.to_string(),
-                name: "Example NEAR non-fungible token".to_string(),
-                symbol: "EXAMPLE".to_string(),
-                icon: Some(DATA_IMAGE_SVG_NEAR_ICON.to_string()),
-                base_uri: None,
-                reference: None,
-                reference_hash: None,
-            },
-        )
-    }
-
-    #[init]
-    pub fn new(owner_id: ValidAccountId, metadata: NFTContractMetadata) -> Self {
-        assert!(!env::state_exists(), "Already initialized");
-        metadata.assert_valid();
-        Self {
-            tokens: NonFungibleToken::new(
-                StorageKey::NonFungibleToken,
-                owner_id,
-                Some(StorageKey::TokenMetadata),
-                Some(StorageKey::Enumeration),
-                Some(StorageKey::Approval),
-            ),
-            metadata: LazyOption::new(StorageKey::Metadata, Some(&metadata)),
-        }
-    }
 
     #[payable]
     pub fn buy_now(
         &mut self,
         token_id: TokenId,
-        receiver_id: ValidAccountId,
+        receiver_id: AccountId,
         token_metadata: TokenMetadata,
     ) -> Token {
-        self.tokens.mint(token_id, receiver_id, Some(token_metadata))
+        self.tokens.internal_mint(token_id, receiver_id, Some(token_metadata))
     }
     // view methods
     /*pub fn get_greeting(&self, account_id: String) -> String {
