@@ -60,7 +60,7 @@ impl Default for Contract{
 impl Contract {
 
     #[payable]
-    pub fn buy_now(
+    pub fn mint_now(
         &mut self,
         token_id: TokenId,
         receiver_id: AccountId,

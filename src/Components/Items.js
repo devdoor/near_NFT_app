@@ -17,7 +17,15 @@ var TOKEN_METADATA = { 'title': 'Olympus Mons', 'description': 'Tallest mountain
 const GAS = "200000000000000";
 
   const Items =(props)=> {
+		// mint button behavoiur
+		const mintButton = async () => {
 
+			await window.contract.mint_now({
+			token_id: TOKEN_ID,
+			receiver_id: window.accountId,
+			token_metadata: TOKEN_METADATA
+			}, GAS, deposit);
+		}
 
       return (
               <div>
@@ -32,7 +40,7 @@ const GAS = "200000000000000";
                       <Col><Card.Title>{props.price}</Card.Title></Col>
                       </Row>
                     <Row className="rowSpacing d-flex justify-content-center">
-                      <Col><Button>Bid</Button></Col>
+                      <Col><Button onClick={mintButton}>Mint</Button></Col>
                       <Col><Button>Buy now</Button></Col>
                       </Row>
                     </Container>
