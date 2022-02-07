@@ -2,8 +2,6 @@ import React from 'react';
 import {Card, Button, Row, Col, Container} from 'react-bootstrap'
 import * as nearAPI from 'near-api-js';
 
-const TOKEN_ID = "099";
-
 let price, mint_deposit, gas_price
 
   const Items =(props)=> {
@@ -11,7 +9,7 @@ let price, mint_deposit, gas_price
 		// mint button behavoiur
 		const mintButton = async () => {
 			await window.contract.mint_now({
-			token_id: TOKEN_ID,
+			token_id: props.token_id,
 			receiver_id: window.accountId,
 			token_metadata: props.metadata
 			}, gas_price, mint_deposit);

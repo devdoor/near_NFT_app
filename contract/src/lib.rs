@@ -22,7 +22,6 @@ pub struct Contract {
     metadata: LazyOption<NFTContractMetadata>,
 }
 
-
 const GAS: u128 = 200000000000000;
 const MINT_DEPOSIT: u128 = 100000000000000000000000; // 0.1 NEAR
 const FIXED_PRICE: u128 = 2900000000000000000000000; // 2.9 NEAR
