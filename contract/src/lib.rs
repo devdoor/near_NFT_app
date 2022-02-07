@@ -98,9 +98,9 @@ impl Contract {
         self.tokens.internal_mint(token_id, receiver_id, Some(token_metadata))
     }
     // view methods
-    /*pub fn get_greeting(&self, account_id: String) -> String {
-
-    }*/
+    pub fn get_price(&self) -> String {
+        FIXED_PRICE.to_string()
+    }
 }
 
 near_contract_standards::impl_non_fungible_token_core!(Contract, tokens);
