@@ -10,20 +10,27 @@ export const {
 } = nearAPI;
 
 
-const deposit = parseNearAmount('0.1');
-const TOKEN_ID = "008";
-
+const DEPOSIT = parseNearAmount('0.1');
+const TOKEN_ID = "099";
 const GAS = "200000000000000";
+let price
 
   const Items =(props)=> {
+		fetchPrice();
 		// mint button behavoiur
 		const mintButton = async () => {
-
 			await window.contract.mint_now({
 			token_id: TOKEN_ID,
 			receiver_id: window.accountId,
 			token_metadata: props.metadata
-			}, GAS, deposit);
+			}, GAS, DEPOSIT);
+		}
+		// buy button behavoiur
+		const buyNowButton = async () => {
+			await window.contract.near_transfer({
+			to: "devdoor5.testnet",
+			amount: price
+		}, GAS, price);
 		}
 
       return (
@@ -40,7 +47,7 @@ const GAS = "200000000000000";
                       </Row>
                     <Row className="rowSpacing d-flex justify-content-center">
                       <Col><Button onClick={mintButton}>Mint</Button></Col>
-                      <Col><Button>Buy now</Button></Col>
+                      <Col><Button onClick={buyNowButton}>Buy now</Button></Col>
                       </Row>
                     </Container>
 
@@ -50,5 +57,9 @@ const GAS = "200000000000000";
             );
 
   }
+
+	async function fetchPrice() {
+		price = await contract.get_price()
+	}
 
   export default Items;
