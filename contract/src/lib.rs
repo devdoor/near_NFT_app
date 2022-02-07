@@ -101,13 +101,16 @@ impl Contract {
     }
     // view methods
     pub fn get_price(&self) -> String {
-        FIXED_PRICE.to_string()
+        let p: String =  FIXED_PRICE.to_string();
+        return p
     }
     pub fn get_mint_deposit(&self) -> String {
-        MINT_DEPOSIT.to_string()
+        let p: String =  MINT_DEPOSIT.to_string();
+        return p
     }
     pub fn get_gas_price(&self) -> String {
-        GAS.to_string()
+        let p: String = GAS.to_string();
+        return p
     }
 }
 
@@ -225,6 +228,20 @@ mod tests {
             .build());
 
         contract.near_transfer(accounts(0), correct_amount.to_string());
+    }
+    #[test]
+    fn test_get_price(){
+        let mut context = get_context(accounts(1));
+        let contract = Contract::default();
+        testing_env!(context
+            .storage_usage(env::storage_usage())
+            .attached_deposit(0)
+            .build());
+
+        assert_eq!(
+            contract.get_price(),
+            FIXED_PRICE.to_string()
+        );
     }
 
 }
