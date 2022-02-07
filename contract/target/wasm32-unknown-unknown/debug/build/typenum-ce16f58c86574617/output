@@ -1,2 +1,0 @@
-cargo:rustc-env=TYPENUM_BUILD_CONSTS=/home/devdoor/NEAR PROJECTS/near_NFT_app/contract/target/wasm32-unknown-unknown/debug/build/typenum-ce16f58c86574617/out/consts.rs
-cargo:rustc-env=TYPENUM_BUILD_OP=/home/devdoor/NEAR PROJECTS/near_NFT_app/contract/target/wasm32-unknown-unknown/debug/build/typenum-ce16f58c86574617/out/op.rs
