@@ -9,8 +9,8 @@ import './../css/reactAppUtils.css'
 
 
     listItems = [
-      {metadata: { 'title': 'Olympus Mons', 'description': 'Tallest mountain in charted solar system',
-    'media': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Olympus_Mons_alt.jpg/1024px-Olympus_Mons_alt.jpg',
+      {metadata: { 'title': 'Near', 'description': "Near (ニア, Nia) is the younger of L's two successors, raised in Wammy's House—Watari's orphanage for gifted children in Winchester, England",
+    'media': 'https://bafybeia5tdrinbi7m2dhnpsahizkagn5cshrmqyhjnwig4vtfgdsnhcdkm.ipfs.dweb.link',
     'copies': 1}}
     ]
 
