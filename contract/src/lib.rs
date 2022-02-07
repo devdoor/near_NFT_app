@@ -73,7 +73,9 @@ impl Contract {
                Ok(value) => value,
                _ => panic!("Amount value error")
            };
-       assert!(amount_u128 == FIXED_PRICE);
+       assert!(amount_u128 == FIXED_PRICE,
+           "The transfer amount {} is different from the price: {}.",
+            amount_u128, FIXED_PRICE);
        assert_eq!(
            amount_u128,
            balance,
@@ -179,6 +181,50 @@ mod tests {
         assert_eq!(token.token_id, token_id);
         assert_eq!(token.owner_id, accounts(0));
         assert_eq!(token.metadata.unwrap(), sample_token_metadata());
+    }
+
+    #[test]
+    fn test_buy() {
+        let mut context = get_context(accounts(1));
+        let mut contract = Contract::default();
+
+        let correct_amount = FIXED_PRICE;
+        testing_env!(context
+            .storage_usage(env::storage_usage())
+            .attached_deposit(correct_amount)
+            .build());
+
+        contract.near_transfer(accounts(0), correct_amount.to_string());
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_buy_with_less_near() {
+        let mut context = get_context(accounts(1));
+        let mut contract = Contract::default();
+
+        let correct_amount = FIXED_PRICE - 1;
+        testing_env!(context
+            .storage_usage(env::storage_usage())
+            .attached_deposit(correct_amount)
+            .build());
+
+        contract.near_transfer(accounts(0), correct_amount.to_string());
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_buy_with_more_near() {
+        let mut context = get_context(accounts(1));
+        let mut contract = Contract::default();
+
+        let correct_amount = FIXED_PRICE + 1;
+        testing_env!(context
+            .storage_usage(env::storage_usage())
+            .attached_deposit(correct_amount)
+            .build());
+
+        contract.near_transfer(accounts(0), correct_amount.to_string());
     }
 
 }
